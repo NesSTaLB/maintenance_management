@@ -1,0 +1,23 @@
+<!-- core/templates/core/register_technician.html -->
+
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تسجيل فني جديد</title>
+</head>
+<body>
+    <div class="container">
+        <h1>تسجيل فني جديد</h1>
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <label for="specialization">التخصص:</label>
+            <input type="text" name="specialization" required>
+            <button type="submit">تسجيل</button>
+        </form>
+        <a href="{% url 'technicians_list' %}">العودة إلى قائمة الفنيين</a>
+    </div>
+</body>
+</html>

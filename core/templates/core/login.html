@@ -1,0 +1,29 @@
+{% load i18n %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% trans "تسجيل الدخول" %}</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">  <!-- رابط لملف CSS الخاص بك -->
+</head>
+<body class="bg-light">
+    <div class="container mt-5">
+        <div class="card">
+            <div class="card-header text-center">
+                <h2>{% trans "تسجيل الدخول" %}</h2>
+            </div>
+            <div class="card-body">
+                <form method="POST">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit" class="btn btn-primary btn-block">{% trans "تسجيل الدخول" %}</button>
+                </form>
+                <p class="text-center mt-3">{% trans "ليس لديك حساب؟" %} <a href="{% url 'register' %}">{% trans "إنشاء حساب" %}</a></p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

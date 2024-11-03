@@ -1,0 +1,23 @@
+msgid "Interface Themes"
+msgstr "ثيمات الواجهة"
+
+msgid "Core"
+msgstr "النواة"
+
+msgid "Air conditioners"
+msgstr "أجهزة التكييف"
+
+msgid "Clients"
+msgstr "العملاء"
+
+msgid "Maintenance requests"
+msgstr "طلبات الصيانة"
+
+msgid "Projects"
+msgstr "المشاريع"
+
+msgid "Technicians"
+msgstr "الفنيون"
+
+msgid "Users"
+msgstr "المستخدمون"

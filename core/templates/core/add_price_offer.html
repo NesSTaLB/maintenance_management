@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>إضافة عرض سعر</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f7fa;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        h2 {
+            color: #2d3436;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #e9ecef;
+            font-size: 24px;
+            position: relative;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            right: 0;
+            width: 60px;
+            height: 2px;
+            background-color: #00b894;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #2d3436;
+            font-weight: 600;
+            font-size: 15px;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        input[type="date"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #dfe6e9;
+            border-radius: 8px;
+            font-size: 15px;
+            color: #2d3436;
+            transition: all 0.3s ease;
+            background-color: #f8f9fa;
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #00b894;
+            box-shadow: 0 0 0 3px rgba(0, 184, 148, 0.1);
+            background-color: #fff;
+        }
+
+        input[type="submit"] {
+            background-color: #00b894;
+            color: white;
+            padding: 14px 28px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+            align-self: flex-start;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #00a885;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 184, 148, 0.2);
+        }
+
+        input[type="submit"]:active {
+            transform: translateY(0);
+        }
+
+        /* رسائل الخطأ */
+        .errorlist {
+            color: #e17055;
+            list-style: none;
+            margin: 5px 0;
+            font-size: 14px;
+            background-color: #fff3f0;
+            padding: 8px 12px;
+            border-radius: 6px;
+        }
+
+        /* نص المساعدة */
+        .helptext {
+            font-size: 13px;
+            color: #636e72;
+            margin-top: 5px;
+            display: block;
+        }
+
+        /* تحسينات للموبايل */
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+                margin: 10px;
+            }
+
+            h2 {
+                font-size: 20px;
+            }
+
+            input[type="submit"] {
+                width: 100%;
+            }
+        }
+
+        /* تأثيرات حركية */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .container {
+            animation: fadeInUp 0.5s ease-out;
+        }
+
+        /* تحسينات إضافية */
+        input::placeholder {
+            color: #b2bec3;
+        }
+
+        /* تنسيق للحقول المطلوبة */
+        label.required::after {
+            content: ' *';
+            color: #e17055;
+        }
+
+        /* تأثير عند التحقق من صحة الإدخال */
+        input:valid {
+            border-color: #00b894;
+        }
+
+        /* تنسيق للتحذيرات */
+        .warning {
+            background-color: #fff8e5;
+            border: 1px solid #ffd700;
+            padding: 10px;
+            border-radius: 6px;
+            margin-bottom: 15px;
+            font-size: 14px;
+            color: #b7791f;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>إضافة عرض سعر جديد</h2>
+        
+        <form method="post">
+            {% csrf_token %}
+            {% for field in form %}
+                <div class="form-group">
+                    {{ field.label_tag }}
+                    {{ field }}
+                    {% if field.help_text %}
+                        <span class="helptext">{{ field.help_text }}</span>
+                    {% endif %}
+                    {% if field.errors %}
+                        <ul class="errorlist">
+                            {% for error in field.errors %}
+                                <li>{{ error }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                </div>
+            {% endfor %}
+            <input type="submit" value="إضافة عرض سعر">
+        </form>
+    </div>
+</body>
+</html>

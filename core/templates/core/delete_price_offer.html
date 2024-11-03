@@ -1,0 +1,9 @@
+<!-- templates/core/delete_price_offer.html -->
+
+<h1>حذف عرض السعر لـ {{ offer.product.name }}</h1>
+<p>هل أنت متأكد أنك تريد حذف هذا العرض؟</p>
+<form method="post">
+    {% csrf_token %}
+    <button type="submit">نعم، حذف</button>
+</form>
+<a href="{% url 'price_offer_list' %}">إلغاء</a>

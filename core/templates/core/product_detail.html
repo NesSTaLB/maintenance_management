@@ -1,0 +1,81 @@
+{% load i18n %}
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% trans "تفاصيل المنتج" %}</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .container {
+            margin-top: 50px;
+        }
+        .card {
+            border-radius: 15px;
+        }
+        .card-header {
+            background-color: #007bff;
+            color: #fff;
+            font-weight: bold;
+        }
+        .card-body p {
+            font-size: 1.1rem;
+            color: #333;
+        }
+        .btn-custom {
+            width: 130px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+        .btn-edit {
+            background-color: #28a745;
+            color: #fff;
+        }
+        .btn-delete {
+            background-color: #dc3545;
+            color: #fff;
+        }
+        .btn-back {
+            background-color: #6c757d;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="card shadow">
+        <div class="card-header text-center">
+            <h1 class="mb-0">{% trans "تفاصيل المنتج" %}: {{ product.name }}</h1>
+        </div>
+        <div class="card-body">
+            <p><strong>{% trans "الوصف" %}:</strong> {{ product.description }}</p>
+            <p><strong>{% trans "السعر" %}:</strong> {{ product.price }} USD</p>
+            <p><strong>{% trans "الكمية المتوفرة" %}:</strong> {{ product.stock_quantity }}</p>
+            <p><strong>{% trans "الوحدة" %}:</strong> {{ product.unit }}</p>
+            <p><strong>{% trans "التصنيف" %}:</strong> {{ product.category|default:"غير مصنف" }}</p>
+            
+            <div class="text-center mt-4">
+                <a href="{% url 'update_product' product.id %}" class="btn btn-custom btn-edit mr-2">
+                    <i class="fas fa-edit"></i> {% trans "تعديل" %}
+                </a>
+                <a href="{% url 'delete_product' product.id %}" class="btn btn-custom btn-delete mr-2">
+                    <i class="fas fa-trash-alt"></i> {% trans "حذف" %}
+                </a>
+                <a href="{% url 'product_list' %}" class="btn btn-custom btn-back">
+                    <i class="fas fa-arrow-left"></i> {% trans "العودة" %}
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

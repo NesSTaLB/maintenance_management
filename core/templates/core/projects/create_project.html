@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <title>إضافة مشروع جديد</title>
+</head>
+<body>
+    <h1>إضافة مشروع جديد</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}  <!-- عرض النموذج -->
+        <button type="submit">حفظ المشروع</button>
+    </form>
+    <a href="{% url 'project_list' %}">العودة إلى قائمة المشاريع</a>  <!-- رابط للعودة -->
+</body>
+</html>

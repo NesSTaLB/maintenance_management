@@ -1,0 +1,9 @@
+<!-- templates/core/delete_product.html -->
+
+<h1>حذف المنتج: {{ product.name }}</h1>
+<p>هل أنت متأكد أنك تريد حذف هذا المنتج؟</p>
+<form method="post">
+    {% csrf_token %}
+    <button type="submit">نعم، حذف</button>
+</form>
+<a href="{% url 'product_list' %}">إلغاء</a>

@@ -1,0 +1,128 @@
+{% load i18n %}
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% trans "الصفحة الرئيسية" %}</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .card {
+            margin: 20px 0;
+            border-radius: 15px;
+        }
+        .btn-custom {
+            width: 150px;
+            border-radius: 25px;
+        }
+        footer {
+            margin-top: 30px;
+            padding: 20px 0;
+            background-color: #343a40;
+            color: #fff;
+        }
+        footer p {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">{% trans "مرحبا بك في لوحة التحكم" %}</h1>
+        
+        {% if user.is_authenticated %}
+            <p class="text-center">{% trans "مرحبًا،" %} {{ user.username }}!</p>
+            <div class="text-center">
+                <a href="{% url 'logout' %}" class="btn btn-danger btn-custom">{% trans "تسجيل الخروج" %}</a>
+            </div>
+        {% else %}
+            <div class="text-center">
+                <a href="{% url 'login' %}" class="btn btn-primary btn-custom">{% trans "تسجيل الدخول" %}</a>
+            </div>
+        {% endif %}
+
+        <div class="row mt-5">
+            <div class="col-md-4">
+                <div class="card shadow-sm">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">{% trans "لوحة التحكم" %}</h5>
+                        <p class="card-text">{% trans "إدارة كل جوانب النظام هنا." %}</p>
+                        <a href="{% url 'admin:index' %}" class="btn btn-info btn-custom">{% trans "اذهب إلى لوحة التحكم" %}</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card shadow-sm">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">{% trans "طلبات الصيانة" %}</h5>
+                        <p class="card-text">{% trans "عرض وإدارة طلبات الصيانة الخاصة بك." %}</p>
+                        <a href="{% url 'maintenance_requests' %}" class="btn btn-success btn-custom">{% trans "عرض الطلبات" %}</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card shadow-sm">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">{% trans "المشاريع" %}</h5>
+                        <p class="card-text">{% trans "إدارة مشاريعك ومتابعة تقدمها." %}</p>
+                        <a href="{% url 'project_list' %}" class="btn btn-warning btn-custom">{% trans "عرض المشاريع" %}</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-5">
+            <div class="col-md-4">
+                <div class="card shadow-sm">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">{% trans "العملاء" %}</h5>
+                        <p class="card-text">{% trans "إدارة معلومات العملاء وطلبات الصيانة." %}</p>
+                        <a href="{% url 'client_list' %}" class="btn btn-primary btn-custom">{% trans "عرض العملاء" %}</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card shadow-sm">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">{% trans "الفنيين" %}</h5>
+                        <p class="card-text">{% trans "إدارة بيانات الفنيين وتخصصاتهم." %}</p>
+                        <a href="{% url 'technicians_list' %}" class="btn btn-dark btn-custom">{% trans "عرض الفنيين" %}</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-5">
+            <div class="col-md-4">
+                <div class="card shadow-sm">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">{% trans "المنتجات" %}</h5>
+                        <p class="card-text">{% trans "عرض وإدارة قائمة المنتجات." %}</p>
+                        <a href="{% url 'product_list' %}" class="btn btn-info btn-custom">{% trans "عرض المنتجات" %}</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card shadow-sm">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">{% trans "عروض الأسعار" %}</h5>
+                        <p class="card-text">{% trans "عرض وإدارة عروض الأسعار." %}</p>
+                        <a href="{% url 'price_offer_list' %}" class="btn btn-success btn-custom">{% trans "عرض العروض" %}</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="text-center">
+        <p>{% trans "جميع الحقوق محفوظة" %} &copy; 2024 خالد العون</p>
+    </footer>
+    
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,102 @@
+{% load i18n %}
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% trans "قائمة عروض الأسعار" %}</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .container {
+            margin-top: 50px;
+        }
+        .card-header, .btn-custom {
+            background-color: #28a745;
+            color: #fff;
+        }
+        .btn-custom {
+            border-radius: 20px;
+            font-size: 1rem;
+        }
+        .offer-status {
+            font-weight: bold;
+            border-radius: 10px;
+            padding: 5px 10px;
+        }
+        .status-active {
+            color: #155724;
+            background-color: #d4edda;
+        }
+        .status-expired {
+            color: #721c24;
+            background-color: #f8d7da;
+        }
+        .status-used {
+            color: #856404;
+            background-color: #fff3cd;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1 class="text-center mb-4">{% trans "قائمة عروض الأسعار" %}</h1>
+
+    <div class="text-center mb-3">
+        <a href="{% url 'create_price_offer' %}" class="btn btn-custom">
+            <i class="fas fa-plus"></i> {% trans "إضافة عرض سعر جديد" %}
+        </a>
+    </div>
+
+    <div class="card shadow">
+        <div class="card-header text-center">
+            {% trans "قائمة عروض الأسعار" %}
+        </div>
+        <div class="card-body p-0">
+            <table class="table table-hover mb-0">
+                <thead class="thead-light">
+                    <tr>
+                        <th scope="col">{% trans "المنتج" %}</th>
+                        <th scope="col">{% trans "العميل" %}</th>
+                        <th scope="col">{% trans "السعر النهائي" %}</th>
+                        <th scope="col">{% trans "حالة العرض" %}</th>
+                        <th scope="col">{% trans "التفاصيل" %}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for offer in offers %}
+                        <tr>
+                            <td>{{ offer.product.name }}</td>
+                            <td>{{ offer.client.name }}</td>
+                            <td>{{ offer.final_price }} USD</td>
+                            <td>
+                                <span class="offer-status {% if offer.status == 'Active' %}status-active{% elif offer.status == 'Expired' %}status-expired{% elif offer.status == 'Used' %}status-used{% endif %}">
+                                    {{ offer.get_status_display }}
+                                </span>
+                            </td>
+                            <td>
+                                <a href="{% url 'price_offer_detail' offer.id %}" class="btn btn-info btn-sm">
+                                    {% trans "عرض التفاصيل" %}
+                                </a>
+                            </td>
+                        </tr>
+                    {% empty %}
+                        <tr>
+                            <td colspan="5" class="text-center text-muted">{% trans "لا توجد عروض أسعار حالياً" %}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

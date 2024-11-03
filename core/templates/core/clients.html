@@ -1,0 +1,99 @@
+{% extends 'core/base.html' %}
+
+{% block title %}العملاء{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2>قائمة العملاء</h2>
+
+    <style>
+        /* تنسيق العنوان */
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        /* تنسيق الجدول */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden; /* لتجنب الزوايا الحادة */
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: right; /* لجعل النص من اليمين لليسار */
+            border: 1px solid #ddd;
+        }
+
+        /* تمييز رأس الجدول */
+        th {
+            background-color: #007bff;
+            color: white;
+            font-weight: bold;
+        }
+
+        /* تمييز الصفوف الزوجية */
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        /* تأثير التمرير */
+        tr:hover {
+            background-color: #e9ecef;
+        }
+
+        /* تنسيق الروابط */
+        .add-client-link {
+            display: inline-block;
+            margin-top: 20px;
+            text-decoration: none;
+            color: #007bff;
+            text-align: center;
+            font-weight: bold;
+            border: 1px solid #007bff;
+            border-radius: 5px;
+            padding: 10px 15px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        /* تأثير التمرير على الروابط */
+        .add-client-link:hover {
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+        }
+    </style>
+
+    <table>
+        <thead>
+            <tr>
+                <th>اسم العميل</th>
+                <th>رقم الهاتف</th>
+                <th>العنوان</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for client in clients %}
+            <tr>
+                <td>{{ client.name }}</td>
+                <td>{{ client.phone_number }}</td>
+                <td>{{ client.address }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="3" class="text-center">لا توجد بيانات لعرضها.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="text-center">
+        <a href="{% url 'create_client' %}" class="add-client-link">إضافة عميل جديد</a>
+    </div>
+</div>
+{% endblock %}

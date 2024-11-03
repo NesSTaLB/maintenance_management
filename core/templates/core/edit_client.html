@@ -1,0 +1,15 @@
+{% extends 'core/base.html' %}
+
+{% block title %}تعديل عميل{% endblock %}
+
+{% block content %}
+<h2>تعديل عميل: {{ client.name }}</h2>
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">حفظ التعديلات</button>
+</form>
+
+<a href="{% url 'client_list' %}">عودة إلى قائمة العملاء</a>
+{% endblock %}
